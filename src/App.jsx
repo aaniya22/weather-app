@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useWeather from './hooks/useWeather';
 import SearchBar from './components/SearchBar';
 import WeatherCard from './components/WeatherCard';
+import SkeletonLoader from './components/SkeletonLoader';
 import './styles/App.styles.css';
 
 function getBgTint(weatherId) {
@@ -51,7 +52,9 @@ function App() {
 
       {error && <p className="error">{error}</p>}
 
-      {weather && <WeatherCard weather={weather} />}
+      {loading && <SkeletonLoader />}
+
+      {weather && !loading && <WeatherCard weather={weather} />}
 
       {!weather && !error && !loading && (
         <p className="empty-state">Search a city to see the forecast</p>
